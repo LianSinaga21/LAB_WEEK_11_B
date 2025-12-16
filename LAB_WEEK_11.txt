@@ -1,0 +1,40 @@
+ParsaulianMianSinaga_101728_Week11
+Assignment 
+
+1) 
+
+private fun openImageCapture() {
+    photoInfo = providerFileManager.generatePhotoUri(System.currentTimeMillis())
+    photoInfo?.let {
+        takePictureLauncher.launch(it.uri)
+    }
+}
+
+
+2) 
+
+> Atribut pertama (uri)
+URI merujuk pada alamat aman (content URI) yang digunakan oleh aplikasi kamera untuk mengakses dan menyimpan file foto atau video melalui FileProvider.
+URI ini mencegah akses langsung ke file system dan menjaga keamanan data antar aplikasi.
+
+> Atribut keempat (relativePath)
+relativePath menunjukkan lokasi folder tujuan penyimpanan file di MediaStore, misalnya:
+- Pictures untuk foto
+- Movies untuk video
+Path ini digunakan agar file yang disimpan dapat muncul dan diakses oleh aplikasi lain seperti Gallery.
+
+3) 
+
+> User menekan tombol Photo di aplikasi.
+> Aplikasi memanggil fungsi openImageCapture().
+> ProviderFileManager.generatePhotoUri() membuat:
+- Nama file
+- Lokasi file
+- URI menggunakan FileProvider
+> URI tersebut dikirim ke kamera melalui:
+takePictureLauncher.launch(uri)
+> Kamera menyimpan hasil foto ke file sesuai URI.
+> Setelah foto diambil, aplikasi memanggil:
+insertImageToStore(photoInfo)
+> File foto disalin ke MediaStore menggunakan ContentResolver.
+> Foto berhasil tersimpan dan dapat diakses melalui Gallery atau aplikasi lain.
